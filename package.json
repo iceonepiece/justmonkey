@@ -1,0 +1,19 @@
+{
+  "name": "justmonkey",
+  "version": "1.0.0",
+  "description": "ใครอยากเป็นเศรษฐี ฉันน่ะสิ ฉันน่ะสิ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iceonepiece/justmonkey.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iceonepiece/justmonkey/issues"
+  },
+  "homepage": "https://github.com/iceonepiece/justmonkey#readme"
+}
