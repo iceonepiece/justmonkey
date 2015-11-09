@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/iceonepiece/justmonkey/issues"
   },
-  "homepage": "https://github.com/iceonepiece/justmonkey#readme"
+  "homepage": "https://github.com/iceonepiece/justmonkey#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
