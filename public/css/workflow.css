@@ -2,11 +2,17 @@
 	background:#eeeeee;
 }
 .text_column1position{
-	text-align: top;
-	padding-top: 50px;
 	padding-left: 20px;
+	padding-top: 0px;
 }
 .text_column2position{
-	padding-top: 150px;
-	padding-left: 150px;
+	position: static;
+	text-align: center;
+		
+}
+.footer{
+	position: fixed; 
+	bottom: 0px;
+	margin-right: auto;
+	margin-left: auto;
 }
