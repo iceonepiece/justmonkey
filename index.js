@@ -9,7 +9,7 @@ app.set('view engine', 'handlebars');
 
 app.use( express.static( __dirname + '/public' ) );
 
-app.get('/', function(req, res){
+app.get('/workflowCreation', function(req, res){
 	res.render('home');
 });
 app.get('/workflow',function(req,res){
