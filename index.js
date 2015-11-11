@@ -15,12 +15,13 @@ app.get('/',function(req,res){
 app.get('/workflowCreation', function(req, res){
 	res.render('home');
 });
+app.get('/workflowExecution', function(req, res){
+	res.end('Workflow Execution');
+});
 app.get('/workflow',function(req,res){
-
 
 	res.render('workflow');
 });
-
 
 app.listen( PORT, function() {
   	console.log('Node app is running on port', PORT );
