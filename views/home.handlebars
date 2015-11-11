@@ -1,1 +1,28 @@
 <h3>Just Monkey</h3>
+
+
+<div class="box"  style="background: #BBAAAA; width: 200px; height: 100px; border-radius: 10px"></div>
+<div class="panel" style="background: #DADADA; width: 400px; height: 400px"></div>
+
+<script type="text/javascript">
+	$(".box").draggable({
+		cursor: 'move',
+		helper: boxHelper,
+		revert: true
+	});
+
+	$(".panel").droppable({
+		accept: '.boxHelper',
+		drop: handleBoxDrop
+	});
+
+	function boxHelper( event ){
+		return "<div class='boxHelper' style='background: #BBAAAA; width: 200px; height: 100px; border-radius: 10px'></div>";
+	}
+
+	function handleBoxDrop( event, ui ){
+		ui.draggable.draggable( 'option', 'revert', false );
+		
+	}
+
+</script>
