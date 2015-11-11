@@ -15,15 +15,9 @@ app.get('/workflowCreation', function(req, res){
 app.get('/workflow',function(req,res){
 
 
-	res.render('mainworkflow', { rabbit : "yo"} );
+	res.render('workflow');
 });
 
-
-app.get('/ice',function(req,res){
-
-
-	res.end('ice');
-});
 
 app.listen( PORT, function() {
   	console.log('Node app is running on port', PORT );
