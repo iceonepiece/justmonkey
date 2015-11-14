@@ -1,6 +1,7 @@
 var express = require('express');
 var exphbs	= require('express-handlebars');
 var bodyParser = require('body-parser');
+var TemplateWorkflow = require('./models/TemplateWorkflow');
 
 var app = express();
 var PORT = 5000;
@@ -31,9 +32,21 @@ app.get('/workflow',function(req,res){
 });
 
 app.post('/save_workflow', function(req, res){
-	console.log( req.body.xml );
 
-	res.end('YEAH');
+	console.log( req.body.xml );
+	var tpWorkflow = new TemplateWorkflow( { name: 'ice', xml: req.body.xml  } );
+	
+	tpWorkflow.save(function (err) {
+		if(!err){
+			console.log('Save template workflow !!!');
+			res.end('succesful');
+		}
+		else{
+			console.log(err);
+			res.end('failed');
+		}
+
+	});
 });
 
 app.listen( PORT, function() {
