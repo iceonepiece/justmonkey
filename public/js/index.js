@@ -127,7 +127,7 @@ $(document).on('ready', function() {
 
       posting.done(function( data ) {
           
-          alert( "done" );
+          alert( "save successful" );
 
       });
 
