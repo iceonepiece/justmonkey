@@ -1,7 +1,10 @@
-var express = require('express');
-var exphbs	= require('express-handlebars');
-var bodyParser = require('body-parser');
-var TemplateWorkflow = require('./models/TemplateWorkflow');
+var express 	= require('express');
+var exphbs		= require('express-handlebars');
+var bodyParser 	= require('body-parser');
+
+var workflow 	= require('./workflow');
+
+require('./database');
 
 var app = express();
 var PORT = 5000;
@@ -19,7 +22,11 @@ app.get('/',function(req,res){
 	res.render('index');
 });
 
-app.get('/workflowCreation', function(req, res){
+
+app.use('/workflow', workflow );
+
+
+/*app.get('/workflowCreation', function(req, res){
 	res.render('home');
 });
 
@@ -29,25 +36,8 @@ app.get('/workflowExecution', function(req, res){
 
 app.get('/workflow',function(req,res){
 	res.render('workflow');
-});
+});*/
 
-app.post('/save_workflow', function(req, res){
-
-	console.log( req.body.xml );
-	var tpWorkflow = new TemplateWorkflow( { name: 'ice', xml: req.body.xml  } );
-	
-	tpWorkflow.save(function (err) {
-		if(!err){
-			console.log('Save template workflow !!!');
-			res.end('succesful');
-		}
-		else{
-			console.log(err);
-			res.end('failed');
-		}
-
-	});
-});
 
 app.listen( PORT, function() {
   	console.log('Node app is running on port', PORT );

@@ -121,9 +121,9 @@ $(document).on('ready', function() {
 
     e.preventDefault();
     
-    saveDiagram(function(err, xml) {
+    /*saveDiagram(function(err, xml) {
       
-      var posting = $.post( '/save_workflow', { xml : xml } );
+      var posting = $.post( '/workflow/save', { xml : xml } );
 
       posting.done(function( data ) {
           
@@ -131,7 +131,7 @@ $(document).on('ready', function() {
 
       });
 
-    });
+    });*/
 
   });
 
