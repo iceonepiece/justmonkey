@@ -13,7 +13,7 @@ router.get('/execute', function(req, res){
 
 		if(err) console.log(err);
 
-		res.render('workflow/execute', { workflows : result } );
+		res.render('workflow/execute', { layout: "workflowMain",workflows : result } );
 	});
 
 });
