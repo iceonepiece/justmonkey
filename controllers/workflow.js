@@ -4,7 +4,7 @@ var router  = express.Router();
 
 
 router.get('/', function(req, res){
-	res.render('workflow/index');
+	res.render('workflow/index',{layout:"workflowMain"});
 });
 
 router.get('/execute', function(req, res){
@@ -20,7 +20,7 @@ router.get('/execute', function(req, res){
 
 
 router.get('/create', function(req, res){
-	res.render('workflow/create');
+	res.render('workflow/create',{layout:"workflowMain"});
 });
 
 
