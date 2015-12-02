@@ -2,7 +2,7 @@ var express 	= require('express');
 var exphbs		= require('express-handlebars');
 var bodyParser 	= require('body-parser');
 
-var workflow 	= require('./workflow');
+var workflow 	= require('./controllers/workflow');
 
 require('./database');
 

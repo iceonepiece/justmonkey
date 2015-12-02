@@ -109,6 +109,8 @@ $(document).on('ready', function() {
 
   var downloadLink = $('#js-download-diagram');
   var downloadSvgLink = $('#js-download-svg');
+  var workflowName = $('#workflow-name');
+  var workflowDescription = $('#workflow-description');
 
   $('.buttons a').click(function(e) {
     if (!$(this).is('.active')) {
@@ -121,9 +123,14 @@ $(document).on('ready', function() {
 
     e.preventDefault();
     
-    /*saveDiagram(function(err, xml) {
-      
-      var posting = $.post( '/workflow/save', { xml : xml } );
+    saveDiagram(function(err, xml) {
+      alert('ccc');
+      var posting = $.post( '/workflow/save', 
+        { 
+          name: workflowName.val(),
+          description: workflowDescription.val(),
+          xml : xml
+        });
 
       posting.done(function( data ) {
           
@@ -131,7 +138,7 @@ $(document).on('ready', function() {
 
       });
 
-    });*/
+    });
 
   });
 

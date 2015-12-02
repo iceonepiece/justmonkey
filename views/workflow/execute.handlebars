@@ -1,0 +1,11 @@
+<h3>Template Workflow List</h3>
+
+
+<div class="text-center">
+{{#each workflows}}
+    <div style="font-size: 24px">{{this.name}}</div>
+    <div>{{this.description}}</div>
+    <div><a href="/workflow/{{this._id}}/profile" class="btn-sm btn-primary">Execute</a>
+
+{{/each}}
+</div>

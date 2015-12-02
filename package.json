@@ -21,6 +21,7 @@
     "bpmn-js": "^0.12.1",
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
-    "mongoose": "^4.2.5"
+    "mongoose": "^4.2.5",
+    "xml2js": "^0.4.15"
   }
 }
