@@ -49,11 +49,14 @@ router.post('/save', function(req, res){
 
 
 router.get('/:id/profile', function(req, res){
-
+	
 	TemplateWorkflow.findOne( { "_id" : req.params.id }, function(err, result){
 
 		res.render('workflow/single/profile', { workflow: result } );
 	});
+
+	
+	
 
 });
 
@@ -63,29 +66,6 @@ router.get('/:id/execute', function(req, res){
 	TemplateWorkflow.findOne( { "_id" : req.params.id }, function(err, result){
 		var xml = result.xml;
 
-		parseString(xml, function (err, strResult) {
-
-			var elements = strResult["bpmn2:definitions"]["bpmn2:process"][0];
-			var keys = Object.keys( elements );
-
-
-			var handler = new WorkflowHandler();
-
-		
-			handler.setup( elements );
-			handler.run();
-			//handler.setStartEvent( elements['bpmn2:startEvent'][0] );
-			//handler.setEndEvent( elements['bpmn2:endEvent'][0] );
-
-			/*for( var i = 0; i < keys.length; i++ ){
-				console.log( elements[keys[i]] );
-			}*/
-		
-    		res.render( "workflow/single/execute", { 
-    			tasks : handler.taskList,
-    			id : req.params.id
-    		});
-		});
 
 	});
 });
