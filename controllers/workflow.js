@@ -1,6 +1,8 @@
 var express 			= require('express');
 var TemplateWorkflow 	= require('../models/TemplateWorkflow');
-var router  = express.Router();
+var WorkflowHandler		= require('./WorkflowHandler');
+var parseString 		= require('xml2js').parseString;
+var router  			= express.Router();
 
 
 router.get('/', function(req, res){
@@ -62,12 +64,35 @@ router.get('/:id/profile', function(req, res){
 router.get('/:id/execute', function(req, res){
 
 	TemplateWorkflow.findOne( { "_id" : req.params.id }, function(err, result){
+		var xml = result.xml;
 
-		res.render('workflow/single/execute', { layout:"workflowMain",workflow: result } );
+		parseString(xml, function (err, strResult) {
+
+			var elements = strResult["bpmn2:definitions"]["bpmn2:process"][0];
+			var keys = Object.keys( elements );
+
+
+			var handler = new WorkflowHandler();
+
+		
+			handler.setup( elements );
+			handler.run();
+	
+    		res.render( "workflow/single/execute", { 
+    			layout:"workflowMain",
+    			tasks : handler.taskList,
+    			id : req.params.id
+    		});
+		});
 	});
-
 });
 
+
+router.post('/:id/execute', function(req, res){
+
+	res.end("DONE");
+
+});
 
 
 module.exports = router;
