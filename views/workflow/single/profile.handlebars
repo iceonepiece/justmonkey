@@ -1,5 +1,24 @@
+<script>
+	var Viewer = require('bpmn-js');
+</script>
 <div class="text-center">
 	<h3>{{workflow.name}}</h3>
 	<div style="font-size: 18px">{{workflow.description}}</div>
+	<br><br>
+	<SCRIPT>
+		var xml = {{workflow.xml}};
+		var viewer = new BpmnViewer({ container: 'body' });
+
+		viewer.importXML(xml, function(err) {
+
+		  if (err) {
+		    console.log('error rendering', err);
+		  } else {
+		    console.log('rendered');
+		  }
+		});
+	</SCRIPT>
+	<!--<div> {{workflow.xml}}</div> -->
+	<br><br>
 	<div><a href="/workflow/{{workflow._id}}/execute" class="btn-sm btn-primary">Execute</a>
 </div>

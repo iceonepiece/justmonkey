@@ -47,11 +47,14 @@ router.post('/save', function(req, res){
 
 
 router.get('/:id/profile', function(req, res){
-
+	
 	TemplateWorkflow.findOne( { "_id" : req.params.id }, function(err, result){
 
 		res.render('workflow/single/profile', { workflow: result } );
 	});
+
+	
+	
 
 });
 
@@ -60,7 +63,7 @@ router.get('/:id/execute', function(req, res){
 
 	TemplateWorkflow.findOne( { "_id" : req.params.id }, function(err, result){
 
-		res.render('workflow/single/execute', { workflow: result } );
+		res.render('workflow/single/execute', { layout:"workflowMain",workflow: result } );
 	});
 
 });
