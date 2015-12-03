@@ -6,7 +6,7 @@ var router  			= express.Router();
 
 
 router.get('/', function(req, res){
-	res.render('workflow/index');
+	res.render('workflow/index',{layout:"workflowMain"});
 });
 
 router.get('/execute', function(req, res){
@@ -22,7 +22,7 @@ router.get('/execute', function(req, res){
 
 
 router.get('/create', function(req, res){
-	res.render('workflow/create');
+	res.render('workflow/create',{layout:"workflowMain"});
 });
 
 
@@ -81,13 +81,21 @@ router.get('/:id/execute', function(req, res){
 				console.log( elements[keys[i]] );
 			}*/
 		
-    		res.render( "workflow/single/execute", { tasks : handler.taskList });
+    		res.render( "workflow/single/execute", { 
+    			tasks : handler.taskList,
+    			id : req.params.id
+    		});
 		});
 
 	});
-
 });
 
+
+router.post('/:id/execute', function(req, res){
+
+	res.end("DONE");
+
+});
 
 
 module.exports = router;
