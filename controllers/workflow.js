@@ -66,7 +66,24 @@ router.get('/:id/execute', function(req, res){
 	TemplateWorkflow.findOne( { "_id" : req.params.id }, function(err, result){
 		var xml = result.xml;
 
+		parseString(xml, function (err, strResult) {
 
+			var elements = strResult["bpmn2:definitions"]["bpmn2:process"][0];
+			var keys = Object.keys( elements );
+
+
+			var handler = new WorkflowHandler();
+
+		
+			handler.setup( elements );
+			handler.run();
+	
+    		res.render( "workflow/single/execute", { 
+    			layout:"workflowMain",
+    			tasks : handler.taskList,
+    			id : req.params.id
+    		});
+		});
 	});
 });
 
