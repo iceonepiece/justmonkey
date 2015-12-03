@@ -50,7 +50,7 @@ router.get('/:id/profile', function(req, res){
 	
 	TemplateWorkflow.findOne( { "_id" : req.params.id }, function(err, result){
 
-		res.render('workflow/single/profile', { workflow: result } );
+		res.render('workflow/single/profile', { layout:"workflowMain",workflow: result } );
 	});
 
 	
