@@ -26,6 +26,16 @@ app.get('/',function(req,res){
 
 app.use('/workflow', workflow );
 
+app.use(function(req, res, next){
+	next(new Error('Not Found'));
+});
+
+app.use(function(err, req, res, next){
+	res.render('error', {
+		message: err.message
+	});
+});
+
 
 /*app.get('/workflowCreation', function(req, res){
 	res.render('home');
