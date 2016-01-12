@@ -1,9 +1,7 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-	name: String,
-	description: String,
-	xml: String
+	templateId: mongoose.Schema.Types.ObjectId
 });
 
 module.exports = mongoose.model('WorkflowExecution', schema);

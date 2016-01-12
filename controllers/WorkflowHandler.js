@@ -19,12 +19,23 @@ WorkflowHandler.prototype.setup = function( xml ){
 	this.endEvent = new Element( endEventXml['$']['id'], 'endEvent' );
 	this.endEvent.inComing = endEventXml['bpmn2:incoming'][0];
 
-	var tasks = xml['bpmn2:task'];
+	var tasks = [];
+
+	var normalTasks = xml['bpmn2:task'];
+	var sendTasks = xml['bpmn2:sendTask'];
+
+	if( normalTasks != undefined ){
+		tasks = tasks.concat(normalTasks);
+	}
+	
+	if( sendTasks != undefined ){
+		tasks = tasks.concat(sendTasks);
+	}
 
 	if( tasks === undefined ){
 		return;
 	}
-	
+
 	for( var i = 0; i < tasks.length; i++ ){
 		
 		var dummy = new Element( tasks[i]['$']['id'], 'task' );
