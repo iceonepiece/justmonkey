@@ -2,6 +2,9 @@ var express 			= require('express');
 var TemplateWorkflow 	= require('../models/TemplateWorkflow');
 var WorkflowHandler		= require('./WorkflowHandler');
 var parseString 		= require('xml2js').parseString;
+var nodemailer			= require('nodemailer');
+var transporter 		= nodemailer.createTransport('smtps://iceonepiece%40gmail.com:jaratrawee1234@smtp.gmail.com');
+
 var router  			= express.Router();
 
 
@@ -77,7 +80,8 @@ router.get('/:id/execute', function(req, res){
 		
 			handler.setup( elements );
 			handler.run();
-	
+		
+			console.log( handler.taskList );
     		res.render( "workflow/single/execute", { 
     			layout:"workflowMain",
     			tasks : handler.taskList,
@@ -89,9 +93,23 @@ router.get('/:id/execute', function(req, res){
 
 
 router.post('/:id/execute', function(req, res){
+	
+	var mailOptions = {
+	    from: 'Jaratrawee <iceonepiece@gmail.com>', // sender address 
+	    to: req.body.to, 
+	    subject: req.body.subject,  
+	    html: req.body.body
+	};
+ 
+	// send mail with defined transport object 
+	transporter.sendMail(mailOptions, function(error, info){
+    	if(error){
+        	return console.log(error);
+    	}
+    	console.log('Message sent: ' + info.response);
+	});
 
 	res.end("DONE");
-
 });
 
 

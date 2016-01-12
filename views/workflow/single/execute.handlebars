@@ -4,6 +4,14 @@
 {{#each tasks}}
 <div style="margin: 0 auto; width: 600px; height: 120px; background: #F4F4F4; margin-top: 30px">
 	<h3>{{this.name}} - [{{this.type}}]</h3>
+	<input type='hidden' name='taskId' value='{{this.id}}'>
+	<div>
+		{{#each this.attributes}}
+			<div>
+				{{this.name}} <input type='{{this.type}}' name='{{this.name}}'>
+			</div>
+		{{/each}}
+	</div>
 
 </div>
 {{/each}}
