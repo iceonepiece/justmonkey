@@ -93,7 +93,7 @@ router.get('/:id/execute', function(req, res){
 
 
 router.post('/:id/execute', function(req, res){
-	
+
 	var mailOptions = {
 	    from: 'Jaratrawee <iceonepiece@gmail.com>', // sender address 
 	    to: req.body.to, 
@@ -106,10 +106,9 @@ router.post('/:id/execute', function(req, res){
     	if(error){
         	return console.log(error);
     	}
+    	res.end("DONE");
     	console.log('Message sent: ' + info.response);
 	});
-
-	res.end("DONE");
 });
 
 
