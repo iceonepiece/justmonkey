@@ -19,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "bpmn-js": "^0.12.1",
+    "bpmn-js-properties-panel": "^0.5.0",
     "bpmn-moddle": "^0.10.1",
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",

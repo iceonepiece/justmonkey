@@ -1,5 +1,7 @@
 var express 			= require('express');
 var TemplateWorkflow 	= require('../models/TemplateWorkflow');
+var Form				= require('../models/form.model');
+var Service 			= require('../models/service.model');
 var WorkflowHandler		= require('./WorkflowHandler');
 var parseString 		= require('xml2js').parseString;
 var nodemailer			= require('nodemailer');
@@ -7,6 +9,51 @@ var transporter 		= nodemailer.createTransport('smtps://iceonepiece%40gmail.com:
 
 var router  			= express.Router();
 
+
+router.get('/saveservice', function(req, res){
+	
+	var service = new Service( { 
+		name: "Age Calculator", 
+		description: "use to calculate age",
+		
+		inputs: [
+			{
+				name: "day",
+				type: "Number"
+			},
+			{
+				name: "month",
+				type: "Number"
+			},
+			{
+				name: "year",
+				type: "Number"
+			}
+		],
+		
+		outputs: [
+			{
+				name: "age",
+				type: "Number"
+			}
+		],
+		
+		script: ""
+	});
+
+	service.save(function (err) {
+		if(!err){
+			console.log('Save form !!!');
+			res.end('succesful');
+		}
+		else{
+			console.log(err);
+			res.end('failed');
+		}
+
+	});
+
+});
 
 router.get('/', function(req, res){
 	res.render('workflow/index',{layout:"workflowMain"});
@@ -23,9 +70,77 @@ router.get('/execute', function(req, res){
 
 });
 
+router.get('/tester', function(req, res){
+	var form = new Form( { 
+		name: "Age Calculator", 
+		description: "use to calculate age from birthdate",
+		elements: [
+			{
+				name: "nameLabel", 
+				type: "label", 
+				value: "Name"
+			},
+			{
+				name: "nameTextbox", 
+				type: "textbox", 
+				value: ""
+			},
+
+			{
+				name: "dayLabel", 
+				type: "label", 
+				value: "Day"
+			},
+			{
+				name: "dayTextbox", 
+				type: "textbox", 
+				value: ""
+			},
+
+			{
+				name: "monthLabel", 
+				type: "label", 
+				value: "Month"
+			},
+			{
+				name: "monthTextbox", 
+				type: "textbox", 
+				value: ""
+			},
+
+			{
+				name: "yearLabel", 
+				type: "label", 
+				value: "Year"
+			},
+			{
+				name: "yearTextbox", 
+				type: "textbox", 
+				value: ""
+			}
+		]
+	});
+
+	form.save(function (err) {
+		if(!err){
+			console.log('Save form !!!');
+			res.end('succesful');
+		}
+		else{
+			console.log(err);
+			res.end('failed');
+		}
+
+	});
+});
 
 router.get('/create', function(req, res){
-	res.render('workflow/create',{layout:"workflowMain"});
+
+	Form.find({}, function(err, result){
+		if(err) console.log(err);
+		console.log( "Form: " + result );
+		res.render('workflow/create',{layout:"workflowMain", forms: result});
+	});
 });
 
 
@@ -34,7 +149,9 @@ router.post('/save', function(req, res){
 	var tpWorkflow = new TemplateWorkflow( { 
 		name: req.body.name, 
 		description: req.body.description,
-		xml: req.body.xml  
+		xml: req.body.xml,
+		variables: req.body.variables,
+		elements: req.body.elements
 	} );
 	
 	tpWorkflow.save(function (err) {

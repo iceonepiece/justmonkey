@@ -3,6 +3,8 @@ var exphbs		= require('express-handlebars');
 var bodyParser 	= require('body-parser');
 
 var workflow 	= require('./controllers/workflow');
+var form 		= require('./controllers/form');
+var service		= require('./controllers/service');
 
 
 require('./database');
@@ -23,8 +25,18 @@ app.get('/',function(req,res){
 	res.render('index');
 });
 
+app.get('/testscript', function(req, res){
+
+	var day, month, year;
+
+	eval('var no = 2; var yes = 3; var ice = no + yes;');
+
+	res.end( "SSS" + ice );
+});
 
 app.use('/workflow', workflow );
+app.use('/service', service );
+app.use('/form', form );
 
 app.use(function(req, res, next){
 	next(new Error('Not Found'));

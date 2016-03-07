@@ -13,6 +13,28 @@ body, html {
   margin: 0;
 }
 
+.myfont{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.small-font{
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.center-popup{
+  display: none;
+  background-color: #AAA;
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:400px;  
+  height:400px;  
+  margin-left:-200px;  
+  margin-top:-200px; 
+}
+
 a:link {
   text-decoration: none;
 }
