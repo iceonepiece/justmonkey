@@ -105,7 +105,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" id="done-input-mapping-btn" class="btn btn-default" data-dismiss="modal">Add</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -229,6 +228,7 @@
   });
 
   $("#done-input-mapping-btn").click(function(){
+    
     var mapping = {
       first: $("#input-mapping-first").val(),
       second: $("#input-mapping-second").val()
@@ -241,7 +241,9 @@
 
   });
 
+
   $("#done-output-mapping-btn").click(function(){
+    
     var mapping = {
       first: $("#output-mapping-first").val(),
       second: $("#output-mapping-second").val()
@@ -292,7 +294,7 @@
         type: "GET",
         dataType : "html",
         success: function( data ) {
-          /*var myjson = JSON.parse(data);
+          var myjson = JSON.parse(data);
 
           var rabbit = "";
           for( var i = 0; i < myjson.length; i++ ){
@@ -302,8 +304,7 @@
             rabbit += '<button data-dismiss="modal" onclick="finishSelectService(this)" id="' + myjson[i]._id + '" class="btn btn-default btn-sm">Select</button>';
             rabbit += "</div>";
           }
-          $('.service-list').html(rabbit);*/
-          alert(data);
+          $('.service-list').html(rabbit);
         }
       });
   }
@@ -311,6 +312,11 @@
   function finishSelectForm(element){
     myElements[currentElementId].formId = element.id;
     $(".selected-form").html( element.id );
+  }
+
+  function finishSelectService(element){
+    myElements[currentElementId].serviceId = element.id;
+    $(".selected-service").html( element.id );
   }
 
   function getMappingList(elementId, type){

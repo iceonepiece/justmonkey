@@ -13,4 +13,8 @@ router.get('/all', function(req, res){
 
 });
 
+router.get('/create', function(req, res){
+	res.render('service/create');
+});
+
 module.exports = router;
