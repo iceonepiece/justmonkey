@@ -6,6 +6,7 @@ var WorkflowHandler = function(){
 	this.startEvent = null;
 	this.endEvent = null;
 	this.taskList = [];
+	this.currentTask = null;
 }
 
 WorkflowHandler.prototype.setup = function( xml ){
@@ -19,17 +20,29 @@ WorkflowHandler.prototype.setup = function( xml ){
 	this.endEvent = new Element( endEventXml['$']['id'], 'endEvent' );
 	this.endEvent.inComing = endEventXml['bpmn2:incoming'][0];
 
+	this.currentTask = this.startEvent;
+
 	var tasks = [];
 
 	var normalTasks = xml['bpmn2:task'];
 	var sendTasks = xml['bpmn2:sendTask'];
+	var serviceTasks = xml['bpmn2:serviceTask'];
+	var userTasks = xml['bpmn2:userTask'];
 
 	if( normalTasks != undefined ){
 		this.setTasks( normalTasks, 'normal' );
 	}
-	
+
 	if( sendTasks != undefined ){
 		this.setTasks( sendTasks, 'send' );
+	}
+
+	if( serviceTasks != undefined ){
+		this.setTasks( serviceTasks, 'service' );
+	}
+	
+	if( userTasks != undefined ){
+		this.setTasks( userTasks, 'user' );
 	}
 
 
@@ -69,6 +82,7 @@ WorkflowHandler.prototype.connectElements = function(){
 	}
 
 }
+
 
 WorkflowHandler.prototype.run = function(){
 
@@ -126,23 +140,7 @@ WorkflowHandler.prototype.setTasks = function(tasks, type){
 		dummy.inComing = tasks[i]['bpmn2:incoming'][0];
 		dummy.outGoing =  tasks[i]['bpmn2:outgoing'][0];
 
-		if(type === 'send'){
-			dummy.attributes = [
-				{ 
-					name : 'to',
-					type : 'email' 
-				},
-				{ 
-					name : 'subject',
-					type : 'text' 
-				},
-				{ 	
-					name : 'body',
-					type : 'text'
-				}
-			];
-		}
-
+		
 		this.taskList.push( dummy );
 	}
 

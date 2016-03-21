@@ -2,6 +2,7 @@ var express 	= require('express');
 var exphbs		= require('express-handlebars');
 var bodyParser 	= require('body-parser');
 
+var execution 	= require('./controllers/execution');
 var workflow 	= require('./controllers/workflow');
 var form 		= require('./controllers/form');
 var service		= require('./controllers/service');
@@ -34,6 +35,7 @@ app.get('/testscript', function(req, res){
 	res.end( "SSS" + ice );
 });
 
+app.use('/execution', execution );
 app.use('/workflow', workflow );
 app.use('/service', service );
 app.use('/form', form );
