@@ -23281,17 +23281,16 @@ ContextPad.prototype.getPopup = function(element){
     html += '<a class="btn btn-default btn-sm" href="/service/create" target="_blank">Create new service</a></div>';
     
     html += '<div><b>Input Mapping</b><button data-toggle="modal" data-target="#inputMappingPopup">Add new mapping</button></div>';
-    html += '<div id="input-mapping-list">' + getMappingList(currentElementId, 'inputMappings') + '</div>';
-  
+    html += '<div id="input-mapping-list"></div>';
     html += '<div><b>Output Mapping</b><button data-toggle="modal" data-target="#outputMappingPopup">Add new mapping</button></div>';
-    html += '<div id="output-mapping-list">' + getMappingList(currentElementId, 'outputMappings') + '</div>';
+    html += '<div id="output-mapping-list"></div>';
 
   }
   else if( element.type === 'bpmn:UserTask'){
     
     var currentFormName = "none";
     if( myElements[currentElementId].form !== undefined && myElements[currentElementId].form.name !== undefined){
-      currentFormName = myElements[currentElementId].form.name;
+      currentFormName = myElements[currentElementId].form.name + viewFormElementsHtml;
     }
 
     html += '<p><b>Form</b>';
@@ -23301,10 +23300,9 @@ ContextPad.prototype.getPopup = function(element){
     html += '<a class="btn btn-default btn-sm" href="/form/create" target="_blank">Create new form</a></div>';
     
     html += '<div><b>Input Mapping</b><button data-toggle="modal" data-target="#inputMappingPopup">Add new mapping</button></div>';
-    html += '<div id="input-mapping-list">' + getMappingList(currentElementId, 'inputMappings') + '</div>';
-  
+    html += '<div id="input-mapping-list"></div>';
     html += '<div><b>Output Mapping</b><button data-toggle="modal" data-target="#outputMappingPopup">Add new mapping</button></div>';
-    html += '<div id="output-mapping-list">' + getMappingList(currentElementId, 'outputMappings') + '</div>';
+    html += '<div id="output-mapping-list"></div>';
   }
 
   return html;
@@ -23313,6 +23311,12 @@ ContextPad.prototype.getPopup = function(element){
 ContextPad.prototype.open = function(element, force) {
   console.log('ContextPad.open');
   $('.setting-popup').html( this.getPopup(element) );
+
+  if(element.type === 'bpmn:UserTask' || element.type === 'bpmn:ServiceTask'){
+    updateMappingList(true);
+    updateMappingList(false);
+  }
+  
   $('.setting-popup').show();
   if (this._current && this._current.open) {
 

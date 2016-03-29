@@ -106,28 +106,13 @@ router.get('/execute', function(req, res){
 
 router.get('/addform', function(req, res){
 	var form = new Form( { 
-		name: "Show info", 
-		description: "show info naja",
+		name: "Show Thai Baht", 
+		description: "This form can only show Thai Baht",
 		elements: [
 			{
-				name: "nameLabel", 
+				name: "resultLabel", 
 				type: "label", 
-				value: "Name"
-			},
-			{
-				name: "dayLabel", 
-				type: "label", 
-				value: "Day"
-			},
-			{
-				name: "monthLabel", 
-				type: "label", 
-				value: "Month"
-			},
-			{
-				name: "yearLabel", 
-				type: "label", 
-				value: "Year"
+				value: ""
 			}
 		]
 	});
@@ -268,12 +253,6 @@ router.get('/:id/execute', function(req, res){
 			var handler = new WorkflowHandler();
 
 			handler.setup( elements );
-
-			console.log( " == execute == ");
-			console.log( result._id );
-			console.log( result.name );
-			console.log( result.description );
-			console.log( " ============== ");
 			
 			var execution = new WorkflowExecution({
 				templateId: result.id,
@@ -287,7 +266,6 @@ router.get('/:id/execute', function(req, res){
 				if(!err){
 					console.log('Execution success');
 					runner.runWorkflow(execution, res);
-					//executeWorkflow(execution, res);
 				}
 				else{
 					console.log(err);

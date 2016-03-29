@@ -56,14 +56,14 @@
         </div>
       </div>
     
-	<form action="/form/create" method="post">
+	<div>
 		<div class="form-body" style="margin-top: 30px; margin-bottom: 20px">
 			<div id="type-column" class="myfont" style="margin-left: 100px; width: 200px; position: absolute">Type</div>
 			<div id="name-column" class="myfont" style="margin-left: 300px; width: 200px; position: absolute">Name</div>
 			<div id="value-column" class="myfont" style="margin-left: 500px; width: 200px; position: absolute">Value</div>
 		</div>
-	<button class="btn btn-warning save-button">Save</button>
-	</form>
+	<button id="save-button" class="btn btn-warning">Save</button>
+	</div>
 	
 </div>
 
@@ -106,7 +106,10 @@
 			$("#preview-form-body").html( htmlForm );
 	
 		});
-	
+
+		$("#save-button").click(function(){
+			alert("SAVE");
+		});
 	});
 </script>
 

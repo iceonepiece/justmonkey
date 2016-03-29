@@ -17,4 +17,14 @@ router.get('/create', function(req, res){
 	res.render('service/create');
 });
 
+router.post('/create', function(req, res){
+	var service = new Service({
+		name: req.body.name,
+		description: req.body.description,
+		inputs: req.body.inputs,
+		outputs: req.body.outputs,
+		script: req.body.script
+	})
+});
+
 module.exports = router;

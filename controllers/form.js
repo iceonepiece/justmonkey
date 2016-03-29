@@ -22,4 +22,18 @@ router.get('/all', function(req, res){
 
 });
 
+
+router.get('/:id', function(req, res){
+
+	Form.findOne({ _id: req.params.id }, function(err, form){
+		if(err){
+			res.json({ message : err});
+		}
+		else{
+			res.json(form);
+		}
+	});
+
+});
+
 module.exports = router;
