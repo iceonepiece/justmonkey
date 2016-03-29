@@ -31,15 +31,16 @@
 
 <div style="margin-left: 20px; margin-top: 80px">
 	<h3>Create new service</h3>	
+	<button id="save-button">Save</button>
 
 	<div style="margin-top: 20px">
 		<p>Name</p>
-		<input type="text" name="name">
+		<input type="text" id="service-name" name="name">
 	</div>
 
 	<div style="margin-top: 20px">
 		<p>Description</p>
-		<input type="text" name="description">
+		<input type="text" id="service-description" name="description">
 	</div>
 
 	<div style="margin-top: 20px">
@@ -76,7 +77,7 @@
 
 	<div style="margin-top: 20px">
 		<p>Script</p>
-		<textarea rows="5" cols="50"></textarea>
+		<textarea rows="5" cols="50" id="service-script"></textarea>
 	</div>
 </div>
 <script>
@@ -87,6 +88,26 @@
 	function setCurrentVariable( n ){
 		currentVariable = n;
 	}
+
+	$("#save-button").click(function(){
+		
+     $.ajax({
+        url: "/service/create",
+        type: "POST",
+        data: {	
+			name: $("#service-name").val(),
+			description: $("#service-description").val(),
+			inputs: inputVariables,
+			outputs: outputVariables,
+			script: $("#service-script").val()
+		},
+        success: function( data ) {
+         	alert("DDD:" + data);
+        }
+      });
+
+	});
+
 
 	$("#done-add-variable-btn").click(function(){
 

@@ -24,7 +24,19 @@ router.post('/create', function(req, res){
 		inputs: req.body.inputs,
 		outputs: req.body.outputs,
 		script: req.body.script
-	})
+	});
+
+	service.save(function (err) {
+		if(!err){
+			console.log('Save service !!!');
+			res.end('succesful');
+		}
+		else{
+			console.log(err);
+			res.end('failed');
+		}
+
+	});
 });
 
 module.exports = router;

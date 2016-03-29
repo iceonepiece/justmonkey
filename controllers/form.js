@@ -7,7 +7,24 @@ router.get('/create', function(req, res){
 });
 
 router.post('/create', function(req, res){
-	res.redirect('/form/create');
+
+	var form = new Form({
+		name: req.body.name,
+		description: req.body.description,
+		elements: req.body.elements
+	});
+
+	form.save(function (err) {
+		if(!err){
+			console.log('Save form !!!');
+			res.end('succesful');
+		}
+		else{
+			console.log(err);
+			res.end('failed');
+		}
+
+	});
 });
 
 router.get('/all', function(req, res){

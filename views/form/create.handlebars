@@ -1,6 +1,17 @@
 <div class="content" style="margin-top: 100px">
 	<h1>Form Creator</h1>
 
+
+	Name:
+	<input type="text" id="form-name">
+
+	<br>
+
+	Description:
+	<input type="text" id="form-description">
+
+	<br>
+
 	<button type="button" id="preview-button" class="btn btn-success" data-toggle="modal" data-target="#previewFormPopup">Preview form</button>
       <!-- Modal -->
       <div id="previewFormPopup" class="modal fade" role="dialog">
@@ -106,9 +117,20 @@
 			$("#preview-form-body").html( htmlForm );
 	
 		});
-
+ 
 		$("#save-button").click(function(){
-			alert("SAVE");
+			$.ajax({
+		        url: "/form/create",
+		        type: "POST",
+		        data: {	
+					name: $("#form-name").val(),
+					description: $("#form-description").val(),
+					elements: elementList
+				},
+		        success: function( data ) {
+		         	alert(data);
+		        }
+		     });
 		});
 	});
 </script>
